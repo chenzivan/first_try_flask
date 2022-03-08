@@ -15,7 +15,7 @@ from app.models import User, Role, Post, Comment, Permission
 import click
 
 
-app = create_app(os.getenv('Flask_CONFIG') or 'default')
+app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 migrate = Migrate(app, db)
 
 
