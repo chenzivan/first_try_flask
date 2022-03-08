@@ -97,7 +97,6 @@ def deploy():
     """Run deployment tasks."""
     # migrate database to latest revision
     from flask_migrate import upgrade
-    db.create_all()
     upgrade()
 
     # create or update user roles
