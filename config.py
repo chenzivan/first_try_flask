@@ -27,7 +27,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
                               'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
     #SQLALCHEMY_DATABASE_URI = 'postgresql-reticulated-22661'
 
@@ -35,7 +35,7 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     TESTING = True
     WTF_CSRF_ENABLED = False
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or \
                               'sqlite:///' + os.path.join(basedir, 'data-test.sqlite')
     #SQLALCHEMY_DATABASE_URI = 'postgresql-reticulated-22661'
 
@@ -80,7 +80,7 @@ class HerokuConfig(ProductionConfig):
         try:
             from werkzeug.middleware.proxy_fix import ProxyFix
         except ImportError:
-            from werkzeug.middleware.proxy_fix import ProxyFix
+            from werkzeug.contrib.fixers import ProxyFix
         app.wsgi_app = ProxyFix(app.wsgi_app)
 
         # log to stderr

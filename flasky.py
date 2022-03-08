@@ -11,15 +11,13 @@ import sys
 from flask_migrate import Migrate
 from app import create_app, db
 from app.models import User, Role, Post, Comment, Permission
-from flask_script import Manager,Shell
 #from flask_bootstrap import WebCDN,ConditionalCDN,BOOTSTRAP_VERSION,JQUERY_VERSION,HTML5SHIV_VERSION,RESPONDJS_VERSION
 import click
-#from flask.cli import AppGroup
+
 
 app = create_app(os.getenv('Flask_CONFIG') or 'default')
-# app = create_app('production')
 migrate = Migrate(app, db)
-manager = Manager(app)
+
 
 
 
@@ -49,7 +47,6 @@ manager = Manager(app)
 @app.shell_context_processor
 def make_shell_context():
     return dict(app=app, db=db, User=User, Role=Role, Post=Post, Comment=Comment, Permission=Permission)
-manager.add_command("shell", Shell(make_context=make_shell_context))
 
 
 @app.cli.command("test")
