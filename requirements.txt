@@ -29,4 +29,4 @@ Werkzeug==0.12.2
 WTForms==2.1
 psycopg2==2.9.3
 Flask-SSLify==0.1.5
-waitress==2.1.0
+gunicorn==19.7.1
