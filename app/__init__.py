@@ -27,6 +27,7 @@ def create_app(config_name):
     mail.init_app(app)
     moment.init_app(app)
     db.init_app(app)
+    db.create_all()
     login_manager.init_app(app)
     pagedown.init_app(app)
 
