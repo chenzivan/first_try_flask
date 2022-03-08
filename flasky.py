@@ -103,7 +103,7 @@ def deploy():
     Role.insert_roles()
 
     # ensure all users are following themselves
-    #User.add_self_follows()
+    User.add_self_follows()
 
 
 
