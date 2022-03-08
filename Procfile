@@ -1,1 +1,1 @@
-web: waitress-serve flasky:app
+web: waitress-serve --listen=*:$PORT flasky:app
