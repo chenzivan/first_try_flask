@@ -1,0 +1,1 @@
+web: waitress-serve flasky:app
