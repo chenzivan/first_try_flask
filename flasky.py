@@ -95,6 +95,7 @@ def profile(length, profile_dir):
 @app.cli.command()
 def deploy():
     """Run deployment tasks."""
+    db.create_all()
     # migrate database to latest revision
     from flask_migrate import upgrade
     upgrade()
