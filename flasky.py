@@ -9,13 +9,17 @@ if os.environ.get('FLASK_COVERAGE'):
 
 import sys
 from flask_migrate import Migrate
-from app import create_app, db
-from app.models import User, Role, Post, Comment, Permission
+from app import create_app
+from flask_sqlalchemy import SQLAlchemy
 #from flask_bootstrap import WebCDN,ConditionalCDN,BOOTSTRAP_VERSION,JQUERY_VERSION,HTML5SHIV_VERSION,RESPONDJS_VERSION
 import click
 
 
+db = SQLAlchemy()
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+db.init_app(app)
+#app = create_app('testing')
+#print(app.config.values())
 migrate = Migrate(app, db)
 
 
@@ -99,6 +103,7 @@ def deploy():
     from flask_migrate import upgrade
     upgrade()
 
+    from app.models import User, Role, Post, Comment, Permission
     # create or update user roles
     Role.insert_roles()
 

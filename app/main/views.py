@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from flask_sqlalchemy import get_debug_queries
 from werkzeug.exceptions import abort
 
-from .. import db
+from flasky import db
 from ..decorators import admin_required, permission_required
 from ..models import User, Role, Permission, Post, Comment
 from . import main
