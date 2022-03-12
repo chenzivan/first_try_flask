@@ -96,8 +96,6 @@ def profile(length, profile_dir):
 def deploy():
     """Run deployment tasks."""
     # migrate database to latest revision
-    with app.app_context():
-        db.create_all()
     from flask_migrate import upgrade
     upgrade()
 

@@ -1,1 +1,1 @@
-web:flask db init; gunicorn flasky:app
+web:gunicorn app:app
