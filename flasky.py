@@ -47,7 +47,7 @@ migrate = Migrate(app, db)
 
 
 
-
+from app.models import User, Role, Post, Comment, Permission
 @app.shell_context_processor
 def make_shell_context():
     return dict(app=app, db=db, User=User, Role=Role, Post=Post, Comment=Comment, Permission=Permission)
@@ -103,7 +103,6 @@ def deploy():
     from flask_migrate import upgrade
     upgrade()
 
-    from app.models import User, Role, Post, Comment, Permission
     # create or update user roles
     Role.insert_roles()
 
