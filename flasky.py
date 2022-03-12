@@ -9,17 +9,13 @@ if os.environ.get('FLASK_COVERAGE'):
 
 import sys
 from flask_migrate import Migrate
-from app import create_app
-from flask_sqlalchemy import SQLAlchemy
+from app import create_app, db
+from app.models import User, Role, Post, Comment, Permission
 #from flask_bootstrap import WebCDN,ConditionalCDN,BOOTSTRAP_VERSION,JQUERY_VERSION,HTML5SHIV_VERSION,RESPONDJS_VERSION
 import click
 
 
-db = SQLAlchemy()
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
-db.init_app(app)
-#app = create_app('testing')
-#print(app.config.values())
 migrate = Migrate(app, db)
 
 
@@ -47,7 +43,7 @@ migrate = Migrate(app, db)
 
 
 
-from app.models import User, Role, Post, Comment, Permission
+
 @app.shell_context_processor
 def make_shell_context():
     return dict(app=app, db=db, User=User, Role=Role, Post=Post, Comment=Comment, Permission=Permission)
@@ -100,6 +96,7 @@ def profile(length, profile_dir):
 def deploy():
     """Run deployment tasks."""
     # migrate database to latest revision
+    db.create_all()
     from flask_migrate import upgrade
     upgrade()
 
